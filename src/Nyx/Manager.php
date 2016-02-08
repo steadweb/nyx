@@ -27,6 +27,11 @@ final class Manager implements OutputableInterface
     protected $output;
 
     /**
+     * @var Handler
+     */
+    protected $handler;
+
+    /**
      * Create a Manager instance using config
      *
      * @param $path
@@ -88,16 +93,23 @@ final class Manager implements OutputableInterface
      */
     public function run()
     {
-        $this->getOutput()->write("[*] Current PID: " . getmypid());
+        if(empty($this->pools)) {
+            $this->getOutput()->write('[*] No pools found. Exiting.');
+            exit(1);
+        } else {
+            $this->getOutput()->write("[*] Current PID: " . getmypid());
 
-        foreach($this->pools as $pool) {
-            $pool->boot();
-        }
+            foreach($this->pools as $pool) {
+                $pool->boot();
+            }
 
-        $this->getOutput()->write('[*] Workers started');
+            $this->getOutput()->write('[*] Workers started');
 
-        while(true) {
-            sleep(15);
+            $this->handler = new Handler($this);
+
+            while(true) {
+                sleep(1);
+            }
         }
     }
 
