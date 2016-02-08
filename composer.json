@@ -14,9 +14,13 @@
         "php": ">=5.3",
         "hassankhan/config": "^0.9.1"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^4"
+    },
     "autoload": {
         "psr-4": {
-            "Nyx\\": "src/Nyx"
+            "Nyx\\": ["src/Nyx"],
+            "Nyx\\Tests\\": ["src/tests"]
         }
     },
     "config": {
