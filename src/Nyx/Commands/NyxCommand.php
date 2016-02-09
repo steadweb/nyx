@@ -13,7 +13,7 @@ class NyxCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('nyx:run')
+            ->setName('run')
             ->setDescription('Nyx run command which boots your workers.')
             ->addArgument(
                 'config',
