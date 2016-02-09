@@ -3,3 +3,4 @@ vendor
 index.php
 nyx.json
 reports
+*.phar
