@@ -2,7 +2,7 @@
 
 namespace Nyx;
 
-class Pool implements PoolInterface
+class Pool implements PoolInterface, OutputableInterface
 {
     /**
      * Default amount of workers to spawn
@@ -29,6 +29,11 @@ class Pool implements PoolInterface
      * @var WorkerInterface
      */
     protected $workerInstance;
+
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
 
     /**
      * Timestamp of when the pool first started
@@ -65,6 +70,8 @@ class Pool implements PoolInterface
         } else {
             throw new \Exception('$worker must be an instance of WorkerInterface and the same as ' . get_class($worker));
         }
+
+        return $this;
     }
 
     /**
@@ -85,10 +92,7 @@ class Pool implements PoolInterface
     public function rebuild()
     {
         // Close
-        foreach($this->getWorkers() as $key => $worker) {
-            $worker->getProcess()->close();
-            unset($this->workers[$key]);
-        }
+        $this->killAll();
 
         // Then spawn new ones
         for($i = 0; $i < $this->numberOfWorkers; $i++) {
@@ -107,9 +111,12 @@ class Pool implements PoolInterface
         if($this->numberOfWorkers > count($this->getWorkers())) {
             $worker = clone $this->workerInstance;
             $this->add($worker);
+            $worker->start();
         } else {
             throw new \Exception('Maximum number of workers allocated for this pool ('.$this->numberOfWorkers.').');
         }
+
+        return $this;
     }
 
     /**
@@ -117,14 +124,33 @@ class Pool implements PoolInterface
      */
     public function kill($pid = null)
     {
-        // Kill the first worker
+        $worker = false;
+
         if(is_null($pid)) {
             $worker = reset($this->workers);
-            $worker->getProcess()->close();
-            unset($this->workers[key($this->workers)]);
+            $pid = key($this->workers);
+        }
+        elseif(array_key_exists($pid, $this->workers)) {
+            $worker = $this->workers[$pid];
         }
 
-        // @todo support PID find and close
+        if($worker) {
+            $worker->getProcess()->close();
+            unset($this->workers[$pid]);
+            $this->getOutput()->write('[x] Worker closed.');
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function killAll()
+    {
+        foreach($this->workers as $pid => $worker) {
+            $this->kill($pid);
+        }
     }
 
     /**
@@ -132,14 +158,32 @@ class Pool implements PoolInterface
      */
     public function boot()
     {
-        // Spawn the amount of workers required, if not already set.
-        while(count($this->workers) < $this->numberOfWorkers) {
-            $this->spawn();
-        }
+        if(!$this->started) {
+            // Spawn the amount of workers required, if not already set.
+            while(count($this->workers) < $this->numberOfWorkers) {
+                $this->spawn();
+            }
 
-        foreach($this->workers as $worker) {
-            // Only start the worker if it isn't running
-            $worker->start();
+            foreach($this->workers as $worker) {
+                // Only start the worker if it isn't running
+                $worker->start();
+            }
+
+            $this->started = true;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function ping()
+    {
+        foreach($this->getWorkers() as $pid => $worker) {
+            // If the worker has stopped, restart it
+            if(!$worker->getProcess()->isRunning()) {
+                $this->getOutput()->write('[x] Worker stopped. Spawning a new one.');
+                $this->kill($pid)->spawn();
+            }
         }
     }
 
@@ -149,5 +193,25 @@ class Pool implements PoolInterface
     public function getWorkers()
     {
         return (array) $this->workers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOutput(OutputInterface $output)
+    {
+        $this->output = $output;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOutput()
+    {
+        if(is_null($this->output)) {
+            $this->setOutput(new Console());
+        }
+
+        return $this->output;
     }
 }

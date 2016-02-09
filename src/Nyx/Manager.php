@@ -108,6 +108,10 @@ final class Manager implements OutputableInterface
             $this->handler = new Handler($this);
 
             while(true) {
+                foreach($this->pools as $pool) {
+                    $pool->ping();
+                }
+
                 sleep(1);
             }
         }

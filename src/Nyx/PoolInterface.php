@@ -16,7 +16,7 @@ interface PoolInterface
     public function setWorkerInstance(WorkerInterface $worker);
 
     /**
-     * Adds a worker to the pool
+     * Adds a worker to the pool.
      *
      * @param WorkerInterface $worker
      * @return mixed
@@ -24,7 +24,7 @@ interface PoolInterface
     public function add(WorkerInterface $worker);
 
     /**
-     * Boot the bool by opening all the workers
+     * Boot the bool by opening all the workers.
      *
      * @return mixed
      */
@@ -45,7 +45,7 @@ interface PoolInterface
     public function spawn();
 
     /**
-     * Kills a worker within the current pool. Can provide a specific PID
+     * Kills a worker within the current pool. Can provide a specific PID.
      *
      * @param $pid
      * @return mixed
@@ -53,7 +53,21 @@ interface PoolInterface
     public function kill($pid = null);
 
     /**
-     * Return the array of workers
+     * Kills all workers within the pool.
+     *
+     * @return mixed
+     */
+    public function killAll();
+
+    /**
+     * Ping all workers within the pool and keep them alive.
+     *
+     * @return mixed
+     */
+    public function ping();
+
+    /**
+     * Return the array of workers.
      *
      * @return array
      */
