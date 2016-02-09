@@ -18,6 +18,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->pool = new Pool();
+        $this->pool->setOutput(new NullOutput());
     }
 
     public function testPoolNotStartedNumberOfWorkers()
@@ -34,6 +35,8 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPoolStartedWithMultipleWorkers()
     {
         $pool = new Pool(10);
+        $pool->setOutput(new NullOutput());
+
         $command = new Command('echo foo');
         $process = new Process($command);
         $worker = new Worker($process);
@@ -50,10 +53,14 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPoolSpawnWorker()
     {
         $pool = new Pool(5);
+        $pool->setOutput(new NullOutput());
 
         $command = new Command('echo foo');
         $process = new Process($command);
         $worker = new Worker($process);
+
+        $process->setOutput(new NullOutput());
+        $worker->setOutput(new NullOutput());
 
         $pool->setWorkerInstance($worker);
 
@@ -68,6 +75,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPoolKillWorker()
     {
         $pool = new Pool(3);
+        $pool->setOutput(new NullOutput());
 
         $command = new Command('echo foo');
         $process = new Process($command);
@@ -99,6 +107,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPoolRebuild()
     {
         $pool = new Pool(2);
+        $pool->setOutput(new NullOutput());
 
         $command = new Command('echo foo');
         $process = new Process($command);
@@ -124,6 +133,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPoolImmutableWorker()
     {
         $pool = new Pool();
+        $pool->setOutput(new NullOutput());
 
         $command1 = new Command('echo foo');
         $process1 = new Process($command1);
@@ -154,6 +164,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPoolImmutableWorkerAdd()
     {
         $pool = new Pool(2);
+        $pool->setOutput(new NullOutput());
 
         $command1 = new Command('echo foo');
         $process1 = new Process($command1);
@@ -183,10 +194,15 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPoolSpawnTooManyWorkers()
     {
         $pool = new Pool(5);
+        $pool->setOutput(new NullOutput());
 
         $command = new Command('echo foo');
         $process = new Process($command);
         $worker = new Worker($process);
+
+        // Nullify the output
+        $process->setOutput(new NullOutput());
+        $worker->setOutput(new NullOutput());
 
         $pool->setWorkerInstance($worker);
 

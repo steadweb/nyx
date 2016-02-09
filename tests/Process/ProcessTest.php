@@ -15,7 +15,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->process = new Process(new Command('echo foo'));
+        $command = new Command('echo foo');
+        $this->process = new Process($command);
         $this->process->setOutput(new NullOutput());
     }
 
