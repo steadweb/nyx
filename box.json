@@ -1,0 +1,7 @@
+{
+  "directories": ["src", "vendor"],
+  "blacklist": ["vendor/phpunit"],
+  "stub": true,
+  "main": "application.php",
+  "output": "nyx.phar"
+}
