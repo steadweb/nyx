@@ -4,7 +4,7 @@ A PHP process manager of the night.
 
 ## Getting started
 
-Download the latest .phar from https://nyx.github.io/download
+Download the latest .phar from https://steadweb.github.io/nyxgit
 
 ```
 wget https://steadweb.github.io/nyx/nyx.phar
