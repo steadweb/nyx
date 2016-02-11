@@ -7,7 +7,7 @@ A PHP process manager of the night.
 Download the latest .phar from https://nyx.github.io/download
 
 ```
-wget https://nyx.github.io/nyx.phar
+wget https://steadweb.github.io/nyx/nyx.phar
 ```
 
 Or install using composer
@@ -18,7 +18,7 @@ composer require steadweb/nyx ~0.1
 
 ## Configuration
 
-Using `nyx.phar` requires your to provide the location of your `nyx.json`. The configuration files suggests where your workers are located, how many workers the manager should spawn and whether to log the outout / errors to file.
+Using `nyx.phar` requires you to provide the location of your `nyx.json`. The configuration files suggests where your workers are located, how many workers the manager should spawn and whether to log the outout / errors to file.
 
 Example.
 
