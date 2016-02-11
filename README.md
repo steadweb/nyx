@@ -124,10 +124,11 @@ As long as a worker process is deemed as `running` `Nyx` will not spawn a new wo
 
 ## Testing
 
-Use the following command to run the tests:
+Checkout the repository from Github and the following commands:
 
 ```
-php nyx.phar tests
+composer install
+php ./vendor/bin/phpunit -c ./tests/phpunit.xml.dist ./tests
 ```
 
 ## License
