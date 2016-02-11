@@ -59,8 +59,8 @@ class Process implements ProcessInterface, OutputableInterface
 
         // Command options
         $in  = array_values($this->command->getOption('in',  array('pipe', 'r')));
-        $out = array_values($this->command->getOption('out', array('pipe', 'a')));
-        $err = array_values($this->command->getOption('err', array('pipe', 'a')));
+        $out = array_values($this->command->getOption('out', array('file', '/tmp/nyx.log', 'a')));
+        $err = array_values($this->command->getOption('err', array('file', '/tmp/nyx-error.log', 'a')));
 
         $this->process = proc_open($command, array(
             0 => $in,
