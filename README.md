@@ -128,7 +128,7 @@ Checkout the repository from Github and the following commands:
 
 ```
 composer install
-php ./vendor/bin/phpunit -c ./tests/phpunit.xml.dist ./tests
+php ./vendor/bin/phpunit -c ./phpunit.xml.dist ./tests
 ```
 
 ## License
