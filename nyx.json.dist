@@ -1,0 +1,31 @@
+{
+  "workers": [
+    {
+      "count": "1",
+      "path": "ping 8.8.8.8",
+      "options": {
+        "in": {
+          "type": "pipe",
+          "command": "r"
+        },
+        "out": {
+          "type": "file",
+          "command": "/tmp/google-ping.log",
+          "options": "a"
+        },
+        "err": {
+          "type": "file",
+          "command": "/tmp/google-ping-error.log",
+          "options": "a"
+        }
+      }
+    },
+    {
+      "count": "1",
+      "path": "ping 10.243.0.213"
+    },
+    {
+      "path": "echo 'Random number:' $RANDOM"
+    }
+  ]
+}
