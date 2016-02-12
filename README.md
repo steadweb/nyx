@@ -124,7 +124,7 @@ As long as a worker process is deemed as `running` `Nyx` will not spawn a new wo
 
 ## Testing
 
-Checkout the repository from Github and the following commands:
+Checkout the repository from Github and run the following commands:
 
 ```
 composer install
