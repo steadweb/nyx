@@ -1,5 +1,7 @@
 # Nyx
 
+[![Build Status](https://travis-ci.org/steadweb/nyx.svg?branch=master)](https://travis-ci.org/steadweb/nyx)
+
 A PHP process manager of the night.
 
 ## Getting started
