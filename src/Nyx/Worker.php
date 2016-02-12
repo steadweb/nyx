@@ -66,7 +66,7 @@ class Worker implements WorkerInterface, OutputableInterface
      */
     public function start()
     {
-        if($this->started === false) {
+        if ($this->started === false) {
             $this->getOutput()->write("[+] Starting worker");
 
             $this->started = true;
@@ -87,7 +87,7 @@ class Worker implements WorkerInterface, OutputableInterface
      */
     public function getOutput()
     {
-        if(is_null($this->output)) {
+        if (is_null($this->output)) {
             $this->setOutput(new Console());
         }
 

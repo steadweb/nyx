@@ -51,7 +51,7 @@ class Command implements CommandInterface
      */
     public function __construct($cmd, array $options = null)
     {
-        if(!is_string($cmd)) {
+        if (!is_string($cmd)) {
             throw new \Exception('$cmd must be a string');
         }
 
@@ -88,7 +88,7 @@ class Command implements CommandInterface
      */
     public function getOption($option, $default = null)
     {
-        if(array_key_exists($option, $this->options)) {
+        if (array_key_exists($option, $this->options)) {
             return $this->options[$option];
         }
 

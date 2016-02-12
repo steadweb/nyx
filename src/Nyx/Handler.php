@@ -52,7 +52,7 @@ final class Handler
      */
     public function catchSignal($signal)
     {
-        switch($signal) {
+        switch ($signal) {
             case SIGTERM:
                 $this->manager->getOutput()->write('[-] Exiting.');
                 exit(1);

@@ -98,7 +98,7 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function close()
     {
-        if(is_resource($this->process)) {
+        if (is_resource($this->process)) {
             proc_close($this->process);
         }
     }
@@ -108,7 +108,7 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function isRunning()
     {
-        if(is_resource($this->process)) {
+        if (is_resource($this->process)) {
             $status = proc_get_status($this->process);
             return array_key_exists('running', $status) && (bool)$status['running'];
         }
@@ -129,14 +129,14 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function status()
     {
-        if($this->isRunning()) {
+        if ($this->isRunning()) {
             return static::PROCESS_RUNNING;
         }
 
-        if(is_resource($this->process)) {
+        if (is_resource($this->process)) {
             $status = proc_get_status($this->process);
 
-            if($status['stopped'] === true) {
+            if ($status['stopped'] === true) {
                 return static::PROCESS_STOPPED;
             }
         }
@@ -157,7 +157,7 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function getOutput()
     {
-        if(is_null($this->output)) {
+        if (is_null($this->output)) {
             $this->output = new Console();
         }
 

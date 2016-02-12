@@ -67,10 +67,10 @@ final class Manager implements OutputableInterface
         $pools = array();
 
         try {
-            if(file_exists($path)) {
+            if (file_exists($path)) {
                 $config = Config::load($path);
 
-                foreach($config->get('workers', array()) as $worker) {
+                foreach ($config->get('workers', array()) as $worker) {
                     $count = array_key_exists('count', $worker) ? $worker['count'] : null;
                     $options = array_key_exists('options', $worker) ? $worker['options'] : array();
 
@@ -79,7 +79,7 @@ final class Manager implements OutputableInterface
                     $pools[] = $pool;
                 }
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
 
@@ -95,7 +95,7 @@ final class Manager implements OutputableInterface
      */
     public function __construct(array $pools)
     {
-        foreach($pools as $pool) {
+        foreach ($pools as $pool) {
             $this->addPool($pool);
         }
     }
@@ -117,13 +117,13 @@ final class Manager implements OutputableInterface
      */
     public function run()
     {
-        if(empty($this->pools)) {
+        if (empty($this->pools)) {
             $this->getOutput()->write('[*] No pools found. Exiting.');
             exit(1);
         } else {
             $this->getOutput()->write("[*] Current PID: " . getmypid());
 
-            foreach($this->pools as $pool) {
+            foreach ($this->pools as $pool) {
                 $pool->boot();
             }
 
@@ -131,8 +131,8 @@ final class Manager implements OutputableInterface
 
             $this->handler = new Handler($this);
 
-            while(true) {
-                foreach($this->pools as $pool) {
+            while (true) {
+                foreach ($this->pools as $pool) {
                     $pool->ping();
                 }
 
@@ -159,7 +159,7 @@ final class Manager implements OutputableInterface
      */
     public function getOutput()
     {
-        if(is_null($this->output)) {
+        if (is_null($this->output)) {
             $this->output = new Console();
         }
 

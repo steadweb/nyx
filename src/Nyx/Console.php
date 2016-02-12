@@ -56,11 +56,11 @@ class Console implements OutputInterface
      */
     public function flush($write = true)
     {
-        if(!$write) {
+        if (!$write) {
             $this->buffer = array();
         }
 
-        foreach((array)$this->buffer as $msg) {
+        foreach ((array)$this->buffer as $msg) {
             $this->write($msg);
         }
     }
@@ -73,7 +73,7 @@ class Console implements OutputInterface
      */
     public function buffer($msg)
     {
-        if(is_string($msg)) {
+        if (is_string($msg)) {
             $this->buffer[] = $msg;
         }
     }
