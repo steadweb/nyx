@@ -1,6 +1,8 @@
 .idea
+build
 vendor
+reports
+
 index.php
 nyx.json
-reports
 *.phar
