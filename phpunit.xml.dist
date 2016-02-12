@@ -28,7 +28,7 @@
 
     <logging>
         <log type="coverage-html"
-             target="../reports"
+             target="./reports"
              charset="UTF-8"
              yui="true"
              highlight="true"
