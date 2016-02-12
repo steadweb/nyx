@@ -38,7 +38,7 @@ class Console implements OutputInterface
     /**
      * Write the message.
      *
-     * @param string $msg
+     * @param  string $msg
      * @return string
      */
     public function write($msg)
@@ -51,16 +51,16 @@ class Console implements OutputInterface
      *
      * $write allows the developer to flush the buffer without outputting.
      *
-     * @param bool $write
+     * @param  bool $write
      * @return mixed
      */
     public function flush($write = true)
     {
-        if(!$write) {
+        if (!$write) {
             $this->buffer = array();
         }
 
-        foreach((array)$this->buffer as $msg) {
+        foreach ((array)$this->buffer as $msg) {
             $this->write($msg);
         }
     }
@@ -68,12 +68,12 @@ class Console implements OutputInterface
     /**
      * Buffer a message ready for output
      *
-     * @param string $msg
+     * @param  string $msg
      * @return $this
      */
     public function buffer($msg)
     {
-        if(is_string($msg)) {
+        if (is_string($msg)) {
             $this->buffer[] = $msg;
         }
     }

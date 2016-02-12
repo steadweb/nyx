@@ -26,53 +26,26 @@
  */
 namespace Nyx;
 
-interface ProcessInterface
+class NullOutput implements OutputInterface
 {
     /**
-     * Set the command
-     *
-     * @param  CommandInterface $command
-     * @return void
+     * {@inheritdoc
      */
-    public function setCommand(CommandInterface $command);
+    public function write($msg)
+    {
+    }
 
     /**
-     * Return the command
-     *
-     * @return CommandInterface
+     * {@inheritdoc
      */
-    public function getCommand();
+    public function flush($write = true)
+    {
+    }
 
     /**
-     * Starts the process.
-     *
-     * @return mixed
+     * {@inheritdoc
      */
-    public function open();
-
-    /**
-     * Close the process
-     *
-     * @return void
-     */
-    public function close();
-
-    /**
-     * Determine whether the process is running
-     *
-     * @return bool
-     */
-    public function isRunning();
-
-    /**
-     * Return an array of errors
-     *
-     * @return array
-     */
-    public function errors();
-
-    /**
-     * @return mixed
-     */
-    public function status();
+    public function buffer($msg)
+    {
+    }
 }

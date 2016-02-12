@@ -82,15 +82,19 @@ class Process implements ProcessInterface, OutputableInterface
         $this->getOutput()->write("[+] New process with command: " . $command);
 
         // Command options
-        $in  = array_values($this->command->getOption('in',  array('pipe', 'r')));
+        $in  = array_values($this->command->getOption('in', array('pipe', 'r')));
         $out = array_values($this->command->getOption('out', array('file', '/tmp/nyx.log', 'a')));
         $err = array_values($this->command->getOption('err', array('file', '/tmp/nyx-error.log', 'a')));
 
-        $this->process = proc_open($command, array(
+        $this->process = proc_open(
+            $command,
+            array(
             0 => $in,
             1 => $out,
             2 => $err
-        ), $pipes);
+            ),
+            $pipes
+        );
     }
 
     /**
@@ -98,7 +102,7 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function close()
     {
-        if(is_resource($this->process)) {
+        if (is_resource($this->process)) {
             proc_close($this->process);
         }
     }
@@ -108,7 +112,7 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function isRunning()
     {
-        if(is_resource($this->process)) {
+        if (is_resource($this->process)) {
             $status = proc_get_status($this->process);
             return array_key_exists('running', $status) && (bool)$status['running'];
         }
@@ -129,14 +133,14 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function status()
     {
-        if($this->isRunning()) {
+        if ($this->isRunning()) {
             return static::PROCESS_RUNNING;
         }
 
-        if(is_resource($this->process)) {
+        if (is_resource($this->process)) {
             $status = proc_get_status($this->process);
 
-            if($status['stopped'] === true) {
+            if ($status['stopped'] === true) {
                 return static::PROCESS_STOPPED;
             }
         }
@@ -157,7 +161,7 @@ class Process implements ProcessInterface, OutputableInterface
      */
     public function getOutput()
     {
-        if(is_null($this->output)) {
+        if (is_null($this->output)) {
             $this->output = new Console();
         }
 

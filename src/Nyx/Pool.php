@@ -73,7 +73,7 @@ class Pool implements PoolInterface, OutputableInterface
      */
     public function __construct($numberOfWorkers = null)
     {
-        if(is_null($numberOfWorkers)) {
+        if (is_null($numberOfWorkers)) {
             $numberOfWorkers = static::DEFAULT_WORKER_COUNT;
         }
 
@@ -87,12 +87,17 @@ class Pool implements PoolInterface, OutputableInterface
     {
         try {
             $this->setWorkerInstance($worker);
-        } catch(\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
-        if($worker->getProcess()->getCommand()->getCmd() === $this->workerInstance->getProcess()->getCommand()->getCmd()) {
+        $cmd1 = $worker->getProcess()->getCommand()->getCmd();
+        $cmd2 = $this->workerInstance->getProcess()->getCommand()->getCmd();
+
+        if ($cmd1 === $cmd2) {
             $this->workers[] = $worker;
         } else {
-            throw new \Exception('$worker must be an instance of WorkerInterface and the same as ' . get_class($worker));
+            $msg = '$worker must be an instance of WorkerInterface and the same as';
+            throw new \Exception($msg . get_class($worker));
         }
 
         return $this;
@@ -103,7 +108,7 @@ class Pool implements PoolInterface, OutputableInterface
      */
     public function setWorkerInstance(WorkerInterface $worker)
     {
-        if(is_null($this->workerInstance)) {
+        if (is_null($this->workerInstance)) {
             $this->workerInstance = clone $worker;
         } else {
             throw new \Exception('setWorkerInstance already called');
@@ -119,7 +124,7 @@ class Pool implements PoolInterface, OutputableInterface
         $this->killAll();
 
         // Then spawn new ones
-        for($i = 0; $i < $this->numberOfWorkers; $i++) {
+        for ($i = 0; $i < $this->numberOfWorkers; $i++) {
             $this->spawn();
         }
 
@@ -132,7 +137,7 @@ class Pool implements PoolInterface, OutputableInterface
     public function spawn()
     {
         // Create a clone worker
-        if($this->numberOfWorkers > count($this->getWorkers())) {
+        if ($this->numberOfWorkers > count($this->getWorkers())) {
             $worker = clone $this->workerInstance;
             $this->add($worker);
             $worker->start();
@@ -150,15 +155,14 @@ class Pool implements PoolInterface, OutputableInterface
     {
         $worker = false;
 
-        if(is_null($pid)) {
+        if (is_null($pid)) {
             $worker = reset($this->workers);
             $pid = key($this->workers);
-        }
-        elseif(array_key_exists($pid, $this->workers)) {
+        } elseif (array_key_exists($pid, $this->workers)) {
             $worker = $this->workers[$pid];
         }
 
-        if($worker) {
+        if ($worker) {
             $worker->getProcess()->close();
             unset($this->workers[$pid]);
             $this->getOutput()->write('[x] Worker closed.');
@@ -172,7 +176,7 @@ class Pool implements PoolInterface, OutputableInterface
      */
     public function killAll()
     {
-        foreach($this->workers as $pid => $worker) {
+        foreach ($this->workers as $pid => $worker) {
             $this->kill($pid);
         }
     }
@@ -182,13 +186,13 @@ class Pool implements PoolInterface, OutputableInterface
      */
     public function boot()
     {
-        if(!$this->started) {
+        if (!$this->started) {
             // Spawn the amount of workers required, if not already set.
-            while(count($this->workers) < $this->numberOfWorkers) {
+            while (count($this->workers) < $this->numberOfWorkers) {
                 $this->spawn();
             }
 
-            foreach($this->workers as $worker) {
+            foreach ($this->workers as $worker) {
                 // Only start the worker if it isn't running
                 $worker->start();
             }
@@ -202,9 +206,9 @@ class Pool implements PoolInterface, OutputableInterface
      */
     public function ping()
     {
-        foreach($this->getWorkers() as $pid => $worker) {
+        foreach ($this->getWorkers() as $pid => $worker) {
             // If the worker has stopped, restart it
-            if(!$worker->getProcess()->isRunning()) {
+            if (!$worker->getProcess()->isRunning()) {
                 $this->getOutput()->write('[x] Worker stopped. Spawning a new one.');
                 $this->kill($pid)->spawn();
             }
@@ -232,7 +236,7 @@ class Pool implements PoolInterface, OutputableInterface
      */
     public function getOutput()
     {
-        if(is_null($this->output)) {
+        if (is_null($this->output)) {
             $this->setOutput(new Console());
         }
 

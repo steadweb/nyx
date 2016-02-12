@@ -3,6 +3,7 @@
 namespace Nyx\Tests\Pool;
 
 use Nyx\Command;
+use Nyx\NullOutput;
 use Nyx\OutputInterface;
 use Nyx\Pool;
 use Nyx\Process;
@@ -215,11 +216,4 @@ class PoolTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(($i+1), count($pool->getWorkers()));
         }
     }
-}
-
-class NullOutput implements OutputInterface
-{
-    public function write($msg){}
-    public function flush($write = true){}
-    public function buffer($msg){}
 }

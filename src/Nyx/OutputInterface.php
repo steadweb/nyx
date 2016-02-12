@@ -31,7 +31,7 @@ interface OutputInterface
     /**
      * Write the message.
      *
-     * @param string $msg
+     * @param  string $msg
      * @return string
      */
     public function write($msg);
@@ -41,7 +41,7 @@ interface OutputInterface
      *
      * $write allows the developer to flush the buffer without outputting.
      *
-     * @param bool $write
+     * @param  bool $write
      * @return mixed
      */
     public function flush($write = true);
@@ -49,7 +49,7 @@ interface OutputInterface
     /**
      * Buffer a message ready for output
      *
-     * @param string $msg
+     * @param  string $msg
      * @return $this
      */
     public function buffer($msg);
