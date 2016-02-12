@@ -1,5 +1,3 @@
-script:
-  - phpunit --coverage-text --coverage-clover=coverage.clover
 filter:
     paths: [src/*]
     excluded_paths: [vendor/*, tests/*]
