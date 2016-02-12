@@ -41,7 +41,7 @@ final class Handler
         $this->manager = $manager;
 
         pcntl_signal(SIGTERM, array($this, "catchSignal"));
-        pcntl_signal(SIGHUP,  array($this, "catchSignal"));
+        pcntl_signal(SIGHUP, array($this, "catchSignal"));
         pcntl_signal(SIGUSR1, array($this, "catchSignal"));
 
         $this->manager->getOutput()->write('[*] Handler registered');

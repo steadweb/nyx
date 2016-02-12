@@ -82,7 +82,7 @@ class Process implements ProcessInterface, OutputableInterface
         $this->getOutput()->write("[+] New process with command: " . $command);
 
         // Command options
-        $in  = array_values($this->command->getOption('in',  array('pipe', 'r')));
+        $in  = array_values($this->command->getOption('in', array('pipe', 'r')));
         $out = array_values($this->command->getOption('out', array('file', '/tmp/nyx.log', 'a')));
         $err = array_values($this->command->getOption('err', array('file', '/tmp/nyx-error.log', 'a')));
 

@@ -90,10 +90,14 @@ class Pool implements PoolInterface, OutputableInterface
         } catch (\Exception $e) {
         }
 
-        if ($worker->getProcess()->getCommand()->getCmd() === $this->workerInstance->getProcess()->getCommand()->getCmd()) {
+        $cmd1 = $worker->getProcess()->getCommand()->getCmd();
+        $cmd2 = $this->workerInstance->getProcess()->getCommand()->getCmd();
+
+        if ($cmd1 === $cmd2) {
             $this->workers[] = $worker;
         } else {
-            throw new \Exception('$worker must be an instance of WorkerInterface and the same as ' . get_class($worker));
+            $msg = '$worker must be an instance of WorkerInterface and the same as';
+            throw new \Exception($msg . get_class($worker));
         }
 
         return $this;
