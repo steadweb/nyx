@@ -31,7 +31,7 @@ interface ProcessInterface
     /**
      * Set the command
      *
-     * @param CommandInterface $command
+     * @param  CommandInterface $command
      * @return void
      */
     public function setCommand(CommandInterface $command);

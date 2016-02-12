@@ -32,7 +32,7 @@ interface PoolInterface
      * Ability to set the worker instance.
      * Immutable - meaning only 1 type of worker can be assigned to the pool.
      *
-     * @param WorkerInterface $worker
+     * @param  WorkerInterface $worker
      * @throws \Exception
      *
      * * @return void
@@ -42,7 +42,7 @@ interface PoolInterface
     /**
      * Adds a worker to the pool.
      *
-     * @param WorkerInterface $worker
+     * @param  WorkerInterface $worker
      * @return mixed
      */
     public function add(WorkerInterface $worker);
@@ -71,7 +71,7 @@ interface PoolInterface
     /**
      * Kills a worker within the current pool. Can provide a specific PID.
      *
-     * @param $pid
+     * @param  $pid
      * @return mixed
      */
     public function kill($pid = null);

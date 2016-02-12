@@ -58,7 +58,7 @@ final class Manager implements OutputableInterface
     /**
      * Create a Manager instance using config
      *
-     * @param $path
+     * @param  $path
      * @return static
      * @throws \Exception
      */
@@ -144,7 +144,7 @@ final class Manager implements OutputableInterface
     /**
      * Set the instance of OutputInterface
      *
-     * @param OutputInterface $output
+     * @param  OutputInterface $output
      * @return mixed
      */
     public function setOutput(OutputInterface $output)

@@ -52,8 +52,8 @@ interface CommandInterface
     /**
      * Attempt to return the option passed.
      *
-     * @param $option
-     * @param $default
+     * @param  $option
+     * @param  $default
      * @return mixed
      */
     public function getOption($option, $default = null);

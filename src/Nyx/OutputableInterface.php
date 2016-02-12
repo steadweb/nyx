@@ -31,7 +31,7 @@ interface OutputableInterface
     /**
      * Set the instance of OutputInterface
      *
-     * @param OutputInterface $output
+     * @param  OutputInterface $output
      * @return mixed
      */
     public function setOutput(OutputInterface $output);

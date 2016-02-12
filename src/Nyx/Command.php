@@ -45,8 +45,8 @@ class Command implements CommandInterface
     /**
      * Command constructor.
      *
-     * @param $cmd
-     * @param array|null $options
+     * @param  $cmd
+     * @param  array|null $options
      * @throws \Exception
      */
     public function __construct($cmd, array $options = null)
