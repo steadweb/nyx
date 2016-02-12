@@ -1,6 +1,8 @@
 # Nyx
 
 [![Build Status](https://travis-ci.org/steadweb/nyx.svg?branch=master)](https://travis-ci.org/steadweb/nyx)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/steadweb/nyx/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/steadweb/nyx/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/steadweb/nyx/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/steadweb/nyx/?branch=master)
 
 A PHP process manager of the night.
 
