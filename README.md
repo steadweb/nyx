@@ -6,6 +6,26 @@
 
 A PHP process manager of the night.
 
+Nyx is a worker process manager which aims to provide functionality to run multiple workers based on configuration. The idea of Nyx replaces the need to run multiple windows / screens / commands within the termnial when instantiating workers. 
+
+A better example of Nyx would be to use Supervisor.d which is heavily supported and maintained. Nyx is a lightweight alternative written in PHP.
+
+### Example
+
+Let's assume the scripts below are long-running process workers that need to be run from the command line. Multiple termnials (or linux screens) would be created to achieve this.
+
+```
+$ php /path/to/worker1.php
+$ php /path/to/worker2.php 
+```
+
+Nyx tries to eliminate this by allowing you to confgure the amount of workers you want to run, thus running one command. 
+
+
+```
+php nyx.phar run /path/to/nyux-config.json
+```
+
 ## Getting started
 
 Download the latest .phar from https://steadweb.github.io/nyx
