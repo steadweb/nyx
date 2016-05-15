@@ -64,7 +64,7 @@ interface PoolInterface
     /**
      * Swans a new worker
      *
-     * @return int
+     * @return mixed
      */
     public function spawn();
 
