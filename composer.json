@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Nyx\\": ["src/Nyx"],
+            "Nyx\\": ["src"],
             "Nyx\\Tests\\": ["src/tests"]
         }
     },

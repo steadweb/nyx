@@ -57,7 +57,6 @@ final class Handler
             case SIGINT:
             case SIGTERM:
                 $this->manager->getOutput()->write('[-] Exiting.');
-                exit(1);
         }
     }
 }
