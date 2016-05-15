@@ -119,7 +119,6 @@ final class Manager implements OutputableInterface
     {
         if (empty($this->pools)) {
             $this->getOutput()->write('[*] No pools found. Exiting.');
-            exit(1);
         } else {
             $this->getOutput()->write("[*] Current PID: " . getmypid());
 

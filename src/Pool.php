@@ -88,6 +88,7 @@ class Pool implements PoolInterface, OutputableInterface
         try {
             $this->setWorkerInstance($worker);
         } catch (\Exception $e) {
+            $this->getOutput()->write('[x] Unable to set worker instance: ' . $e->getMessage());
         }
 
         $cmd1 = $worker->getProcess()->getCommand()->getCmd();
