@@ -4,7 +4,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/steadweb/nyx/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/steadweb/nyx/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/steadweb/nyx/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/steadweb/nyx/?branch=master)
 
-A PHP process manager of the night.
+A lighweight PHP process manager.
 
 Nyx is a worker process manager which aims to provide functionality to run multiple workers based on configuration. The idea of Nyx replaces the need to run multiple windows / screens / commands within the termnial when instantiating workers. 
 
