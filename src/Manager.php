@@ -33,7 +33,7 @@ final class Manager implements OutputableInterface
     /**
      * @string
      */
-    const VERSION = '0.1.2';
+    const VERSION = '0.1.3';
 
     /**
      * @string
